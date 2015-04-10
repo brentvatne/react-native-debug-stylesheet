@@ -1,18 +1,39 @@
 var StyleSheet = require('react-native').StyleSheet;
 var merge = require('merge');
+var assign = require('Object.assign');
 
 function randomHexColor() {
   return '#'+('00000'+(Math.random()*16777216<<0).toString(16)).substr(-6);
 };
 
-class DebugStyleSheet {
-  static create(obj: {[key: string]: any}): {[key: string]: number} {
-    for (var key in obj) {
-      obj[key] = merge(obj[key], {borderColor: randomHexColor(), borderWidth: 1});
-    }
+function createDebugStylesheet(options) {
+  return {
+    create: (obj) => {
+      for (var key in obj) {
+        var debugOptions = {};
 
-    return StyleSheet.create(obj);
+        for (var debugKey in options) {
+          if (typeof options[debugKey] == 'function') {
+            debugOptions[debugKey] = options[debugKey].call(this, key);
+          } else {
+            debugOptions[debugKey] = options[debugKey];
+          }
+        }
+
+        obj[key] = merge(obj[key], debugOptions);
+      }
+
+      return StyleSheet.create(obj);
+    }
   }
 }
 
-module.exports = DebugStyleSheet;
+DefaultDebugStylesheet = createDebugStylesheet({borderColor: randomHexColor, borderWidth: 1});
+
+module.exports = assign(
+  DefaultDebugStylesheet,
+  { Borders: DefaultDebugStylesheet,
+    Backgrounds: createDebugStylesheet({backgroundColor: randomHexColor, opacity: 0.5}),
+    createDebugStylesheet: createDebugStylesheet,
+    randomHexColor: randomHexColor }
+)
