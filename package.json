@@ -1,6 +1,6 @@
 {
   "name": "react-native-debug-stylesheet",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Add coloured borders to all views to make it easier to debug layout issues",
   "main": "index.js",
   "scripts": {
@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/brentvatne/react-native-debug-stylesheet/issues"
   },
-  "homepage": "https://github.com/brentvatne/react-native-debug-stylesheet"
+  "homepage": "https://github.com/brentvatne/react-native-debug-stylesheet",
+  "dependencies": {
+    "react-native": "^0.3.10"
+  }
 }
