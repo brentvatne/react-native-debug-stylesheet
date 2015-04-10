@@ -33,7 +33,7 @@ DefaultDebugStylesheet = createDebugStylesheet({borderColor: randomHexColor, bor
 module.exports = assign(
   DefaultDebugStylesheet,
   { Borders: DefaultDebugStylesheet,
-    Backgrounds: createDebugStylesheet({backgroundColor: randomHexColor, opacity: 0.5}),
+    Backgrounds: createDebugStylesheet({backgroundColor: randomHexColor, opacity: 0.85}),
     createDebugStylesheet: createDebugStylesheet,
     randomHexColor: randomHexColor }
 )
