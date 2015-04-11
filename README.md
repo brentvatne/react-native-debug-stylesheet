@@ -34,22 +34,18 @@ Or if you'd rather make your own debug stylesheet:
 
 ```javascript
 var { createDebugStylesheet, randomHexColor } = require('react-native-debug-stylesheet');
-var StyleSheet = createDebugStylesheet({color: randomHexColor, fontWeight: 'bold', fontSize: someOtherFn});
-```
 
-Any function value that is passed in will be evaluated with the key of the style it will be applied to,
-so if you want to apply this to only specific things this is possible too:
-
-```javascript
-var { createDebugStylesheet, randomHexColor } = require('react-native-debug-stylesheet');
-var StyleSheet = createDebugStylesheet({color: randomHexColor, fontWeight: boldForHeaders});
-var boldForHeaders = (key) => {
-  if (key.match(/header/)) {
-    return 'bold';
-  } else {
-    return 'normal';
+var doubleHeaderFontSize = function(styleClass, cssProperty, cssValue) {
+  if (cssValue && styleClass.match(/header/)) {
+    return cssValue * 2;
   }
+  return cssValue;
 }
+
+var StyleSheet = createDebugStylesheet({
+  backgroundColor: randomHexColor, fontSize: doubleHeaderFontSize,
+  borderColor: randomHexColor, borderWidth: 0.5,
+});
 ```
 
 ---

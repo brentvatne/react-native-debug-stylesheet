@@ -6,24 +6,31 @@ function randomHexColor() {
   return '#'+('00000'+(Math.random()*16777216<<0).toString(16)).substr(-6);
 };
 
-function createDebugStylesheet(options) {
+function createDebugStylesheet(debugOptions) {
   return {
-    create: (obj) => {
-      for (var key in obj) {
-        var debugOptions = {};
+    create: (styleObject) => {
+      for (var styleClass in styleObject) {
 
-        for (var debugKey in options) {
-          if (typeof options[debugKey] == 'function') {
-            debugOptions[debugKey] = options[debugKey].call(this, key);
+        var propertiesForStyleClass = {};
+        for (var debugProperty in debugOptions) {
+
+          // Apply the function to get a value unique to this styleClass for the property
+          if (typeof debugOptions[debugProperty] == 'function') {
+            var value = debugOptions[debugProperty].call(this, styleClass, debugProperty, styleObject[styleClass][debugProperty]);
+
+            if (value != null && (typeof value !== 'undefined')) {
+              propertiesForStyleClass[debugProperty] = value;
+            }
+          // Otherwise just set the value
           } else {
-            debugOptions[debugKey] = options[debugKey];
+            propertiesForStyleClass[debugProperty] = debugOptions[debugProperty];
           }
         }
 
-        obj[key] = merge(obj[key], debugOptions);
+        styleObject[styleClass] = merge(styleObject[styleClass], propertiesForStyleClass);
       }
 
-      return StyleSheet.create(obj);
+      return StyleSheet.create(styleObject);
     }
   }
 }
