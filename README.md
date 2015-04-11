@@ -30,7 +30,10 @@ If you prefer to use coloured backgrounds, then do this:
 var StyleSheet = require('react-native-debug-stylesheet').Backgrounds;
 ```
 
-Or if you'd rather make your own debug stylesheet:
+### Customize
+
+If you'd rather make your own debug stylesheet than use the default
+border/background color options, you can do this easily too.
 
 ```javascript
 var { createDebugStylesheet, randomHexColor } = require('react-native-debug-stylesheet');
