@@ -1,6 +1,6 @@
 {
   "name": "react-native-debug-stylesheet",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Add coloured borders or backgrounds to all views to make it easier to debug layout issues",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "url": "https://github.com/brentvatne/react-native-debug-stylesheet/issues"
   },
   "homepage": "https://github.com/brentvatne/react-native-debug-stylesheet",
-  "dependencies": {
-    "react-native": "^0.3.10"
+  "peerDependencies": {
+    "react-native": "^0.4.0"
   }
 }
