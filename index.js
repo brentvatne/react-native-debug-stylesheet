@@ -35,7 +35,7 @@ function createDebugStylesheet(debugOptions) {
   }
 }
 
-DefaultDebugStylesheet = createDebugStylesheet({borderColor: randomHexColor, borderWidth: 1});
+var DefaultDebugStylesheet = createDebugStylesheet({borderColor: randomHexColor, borderWidth: 1});
 
 module.exports = assign(
   DefaultDebugStylesheet,
